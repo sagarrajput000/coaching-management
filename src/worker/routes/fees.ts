@@ -22,8 +22,8 @@ fees.get('/', async (c) => {
   const where: string[] = ['f.owner_sub = ?']
   const binds: unknown[] = [owner]
   if (status === 'paid') where.push('f.paid_at IS NOT NULL')
-  if (status === 'due') where.push("f.paid_at IS NULL AND f.due_date >= date('now')")
-  if (status === 'overdue') where.push("f.paid_at IS NULL AND f.due_date < date('now')")
+  if (status === 'due') where.push('f.paid_at IS NULL AND f.due_date >= date(\'now\')')
+  if (status === 'overdue') where.push('f.paid_at IS NULL AND f.due_date < date(\'now\')')
   if (batchId) {
     where.push('f.batch_id = ?')
     binds.push(batchId)
