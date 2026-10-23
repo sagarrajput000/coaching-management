@@ -73,7 +73,7 @@ batches.delete('/:id', async (c) => {
   await db.batch([
     db.prepare(`UPDATE students SET batch_id = NULL WHERE owner_sub = ? AND batch_id = ?`).bind(owner, batchId),
     db.prepare(`UPDATE fees SET batch_id = NULL WHERE owner_sub = ? AND batch_id = ?`).bind(owner, batchId),
-    db.prepare(`DELETE FROM attendance WHERE batch_id = ? AND owner_sub = ?`).bind(batchId, owner),
+    db.prepare(`DELETE FROM attendance WHERE owner_sub = ? AND batch_id = ?`).bind(owner, batchId),
     db.prepare(`DELETE FROM batches WHERE owner_sub = ? AND id = ?`).bind(owner, batchId),
   ])
   return privateJson(c, { ok: true })
